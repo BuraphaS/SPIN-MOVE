@@ -208,6 +208,7 @@ function stepSpin(): void {
   max-width: 640px;
   margin: 24px auto;
   text-align: center;
+  overflow: hidden;
 }
 .spin-area {
   display: inline-block;
