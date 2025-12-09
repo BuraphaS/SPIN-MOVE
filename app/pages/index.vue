@@ -16,7 +16,8 @@
         v-model="input"
         type="text"
         placeholder="Input your word"
-        style="height: 30px; border-radius: 4px;"/>
+        style="height: 30px; border-radius: 4px;"
+        @keyup.enter="addText()"/>
       <button type="button" class="add-btn" @click="addText()">Add</button>
     </div>
     <div class="table">
@@ -25,16 +26,22 @@
           <th>Words</th>
         </tr>
         <tr v-for="(item, index) in chartData.labels" :key="index">
-          <td style="display: flex; justify-content: space-between; align-items: center;">
+          <td
+            :style="lastResult === item ? 'background-color: green  ; color: white;' : ''"
+            style="display: flex; justify-content: space-between; align-items: center;">
             <div>
               {{ item }}
             </div>
-            <div class="delete-btn" @click="deleteText(index)">X</div>
+            <div 
+              :style="lastResult === item ? 'color: white;' : ''"
+              class="delete-btn" @click="deleteText(index)">
+              x
+            </div>
           </td>
         </tr>
       </table>
     </div>
-    <div style="margin-top: 16px;">
+    <div style="margin-top: 16px; font-weight: 400; font-size: 24px;">
       Winner: {{ `${lastResult }` || '?'}}
     </div>
   </div>
@@ -208,6 +215,7 @@ function stepSpin(): void {
   max-width: 640px;
   margin: 24px auto;
   text-align: center;
+  overflow: hidden;
 }
 .spin-area {
   display: inline-block;
@@ -263,7 +271,8 @@ table {
 }
 
 td, th {
-  border: 1px solid #dddddd;
+  border: 1px solid #000000;
+  background-color: #ffffff;
   text-align: left;
   padding: 8px;
 }
